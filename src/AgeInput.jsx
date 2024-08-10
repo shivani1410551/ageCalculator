@@ -26,7 +26,7 @@ const AgeInput = ({
         ref={inputRef}
         onClick={() => handleFocus(num)}
         value={birthDate}
-        onChange={(e) => Number(setBirthDate(e.target.value))}
+        onChange={(e) => setBirthDate(Number(e.target.value))}
       />{" "}
       <br />
       {Error && <span className="error">{Error}</span>}
