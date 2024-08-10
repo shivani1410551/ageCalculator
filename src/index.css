@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .label {
+    @apply uppercase text-Smokeygrey md:text-[0.55rem] md:ml-2  xs:font-bold 
+    md:font-semibold md:tracking-[0.25rem]
+    xs:text-[0.55rem] xs:ml-2;
+  }
+  .inputStyle {
+    @apply md:p-2 rounded border md:mx-2 md:w-[150px]
+    xs:w-[65px]
+    md:placeholder:text-2xl
+    placeholder:text-Smokeygrey 
+    text-Offblack
+    shadow-sm
+    xs:placeholder:text-[0.6rem] xs:mx-1 xs:pl-2
+
+    font-bold cursor-pointer outline-none hover:border-Purple;
+  }
+  .hyphen {
+    @apply text-Purple font-extrabold md:text-7xl 
+    md:text-5xl
+    xs:text-3xl;
+  }
+  .outputText {
+    @apply lg:text-7xl font-extrabold italic 
+    md:text-5xl
+    xs:text-3xl tracking-[0.15rem];
+  }
+  .labelError {
+    @apply text-Lightred;
+  }
+  .inputError {
+    @apply border-Lightred;
+  }
+  .error {
+    @apply text-Lightred p-1 text-xs;
+  }
+}
