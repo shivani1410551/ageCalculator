@@ -1,4 +1,4 @@
-const Divider = ({ calculateAge }) => {
+const Divider = ({ onCalculateAge }) => {
   return (
     <div className="divide">
       <div
@@ -7,7 +7,7 @@ const Divider = ({ calculateAge }) => {
   xs:my-6
   "
       ></div>
-      <button type="submit" onClick={calculateAge}>
+      <button type="submit" onClick={onCalculateAge}>
         {" "}
         <img
           src="./assets/images/icon-arrow.svg"

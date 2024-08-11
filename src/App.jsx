@@ -6,13 +6,9 @@ const App = () => {
   const [birthDay, setBirthDay] = useState("");
   const [birthMonth, setBirthMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  const [age, setAge] = useState(null);
-  const [Error, setError] = useState({
-    birthDay: "",
-    birthMonth: "",
-    birthYear: "",
-  });
-
+  const [age, setAge] = useState([]);
+  const [Error, setError] = useState();
+  console.log(birthMonth, birthYear, birthDay);
   const inputRef_1 = useRef(null);
   const inputRef_2 = useRef(null);
   const inputRef_3 = useRef(null);
@@ -158,16 +154,24 @@ const App = () => {
           />
         </form>
 
-        <Divider calculateAge={calculateAge} />
+        <Divider onCalculateAge={calculateAge} />
 
         <div className="output-box md:-mt-4 xs:-mt-3">
-          <OutputBlock className="year-output-block " text="years" age={age} />
+          <OutputBlock
+            className="year-output-block "
+            text="years"
+            age={age.birthDate}
+          />
           <OutputBlock
             className="month-output-block "
             text="months"
-            age={age}
+            age={age.birthMonth}
           />
-          <OutputBlock className="days-output-block " text="days" age={age} />
+          <OutputBlock
+            className="days-output-block "
+            text="days"
+            age={age.birthYear}
+          />
         </div>
       </main>
     </div>
