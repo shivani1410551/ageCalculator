@@ -4,7 +4,7 @@ const AgeForm = ({ handleAge, setAge }) => {
   const [birthDay, setBirthDay] = useState("");
   const [birthMonth, setBirthMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  const [Error, setError] = useState({ day: "", month: "", year: "" });
+  const [Error, setError] = useState();
   const inputRef_1 = useRef(null);
   const inputRef_2 = useRef(null);
   const inputRef_3 = useRef(null);
@@ -33,7 +33,7 @@ const AgeForm = ({ handleAge, setAge }) => {
       inputRef_3.current.focus();
     }
   }
-
+  // validate
   const validateDate = () => {
     const dayInt = parseInt(birthDay);
     const monthInt = parseInt(birthMonth);
@@ -74,7 +74,6 @@ const AgeForm = ({ handleAge, setAge }) => {
     setError("");
     return birthDate;
   };
-
   // calculate age
   const calculateAge = (birthDate) => {
     const currentDate = new Date();
@@ -98,14 +97,10 @@ const AgeForm = ({ handleAge, setAge }) => {
 
     setAge({ years: ageYears, months: ageMonths, days: ageDays });
   };
-
   // handle form
   function handleSubmit(e) {
     e.preventDefault();
     if (!birthDay || !birthMonth || !birthYear) return;
-    const newAge = { birthDay, birthMonth, birthYear };
-    handleAge(newAge);
-    console.log(newAge);
     const birthDate = validateDate();
     if (birthDate) {
       calculateAge(birthDate);
