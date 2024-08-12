@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import AgeInput from "./AgeInput";
 import Divider from "./Divider";
+import InputData from "./InputData";
+import OutputData from "./OutputData";
 import OutputBlock from "./OutputBlock";
 const App = () => {
   const [birthDay, setBirthDay] = useState("");
@@ -8,7 +10,7 @@ const App = () => {
   const [birthYear, setBirthYear] = useState("");
   const [age, setAge] = useState([]);
   const [Error, setError] = useState();
-  console.log(birthMonth, birthYear, birthDay);
+
   const inputRef_1 = useRef(null);
   const inputRef_2 = useRef(null);
   const inputRef_3 = useRef(null);
@@ -112,66 +114,26 @@ const App = () => {
           onSubmit={handleSubmit}
           className="input-box flex items-center md:mb-10 xs:mb-10"
         >
-          <AgeInput
-            LabelClassName="label"
-            name="day"
-            placeholder="DD"
-            inputClassName="inputStyle"
-            labelRef={labelRef_1}
-            inputRef={inputRef_1}
-            Error={Error}
-            birthDate={birthDay}
-            setBirthDate={setBirthDay}
-            num="1"
-            handleFocus={handleFocus}
-          />
-
-          <AgeInput
-            name="month"
-            placeholder="MM"
-            inputClassName="inputStyle"
-            LabelClassName="label"
-            labelRef={labelRef_2}
-            inputRef={inputRef_2}
-            Error={Error}
-            birthDate={birthMonth}
-            setBirthDate={setBirthMonth}
-            num="2"
-            handleFocus={handleFocus}
-          />
-          <AgeInput
-            LabelClassName="label"
-            name="year"
-            placeholder="YYYY"
-            inputClassName="inputStyle"
-            labelRef={labelRef_3}
-            inputRef={inputRef_3}
-            Error={Error}
-            birthDate={birthYear}
-            setBirthDate={setBirthYear}
-            num="3"
-            handleFocus={handleFocus}
-          />
+          {InputData.map((item) => (
+            <AgeInput
+              key={item.num}
+              item={item}
+              labelRef={labelRef_1}
+              inputRef={inputRef_1}
+              Error={Error}
+              birthDate={birthDay}
+              setBirthDate={setBirthDay}
+              handleFocus={handleFocus}
+            />
+          ))}
         </form>
 
         <Divider onCalculateAge={calculateAge} />
 
         <div className="output-box md:-mt-4 xs:-mt-3">
-          <OutputBlock
-            className="year-output-block "
-            text="years"
-            age={age.birthDate}
-          />
-          <OutputBlock
-            className="month-output-block "
-            text="months"
-            age={age.birthMonth}
-          />
-          <OutputBlock
-            className="days-output-block "
-            text="days"
-            age={age.birthYear}
-          />
+          {OutputData.map((item) => (
+            <OutputBlock key={item.id} item={item} />
+          ))}
         </div>
       </main>
     </div>

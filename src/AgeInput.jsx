@@ -1,30 +1,30 @@
 const AgeInput = ({
-  LabelClassName,
-  name,
-  placeholder,
+  item,
   labelRef,
-  inputClassName,
   inputRef,
   Error,
   birthDate,
   setBirthDate,
-  num,
   handleFocus,
 }) => {
   return (
     <div className="input-block">
-      <label htmlFor={name} className={`${LabelClassName}`} ref={labelRef}>
-        {name}
+      <label
+        htmlFor={item.name}
+        className={`${item.LabelClassName}`}
+        ref={labelRef}
+      >
+        {item.name}
       </label>{" "}
       <br />
       <input
         type="text"
-        name={name}
-        id={name}
-        placeholder={placeholder}
-        className={`${inputClassName}`}
+        name={item.name}
+        id={item.name}
+        placeholder={item.placeholder}
+        className={`${item.inputClassName}`}
         ref={inputRef}
-        onClick={() => handleFocus(num)}
+        onClick={() => handleFocus(item.num)}
         value={birthDate}
         onChange={(e) => setBirthDate(Number(e.target.value))}
       />{" "}
