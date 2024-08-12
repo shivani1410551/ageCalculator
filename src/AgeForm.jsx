@@ -1,9 +1,10 @@
 import AgeInput from "./AgeInput";
 import { useRef, useEffect, useState } from "react";
-const AgeForm = ({ Error, handleAge }) => {
+const AgeForm = ({ handleAge, setAge }) => {
   const [birthDay, setBirthDay] = useState("");
   const [birthMonth, setBirthMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
+  const [Error, setError] = useState({ day: "", month: "", year: "" });
   const inputRef_1 = useRef(null);
   const inputRef_2 = useRef(null);
   const inputRef_3 = useRef(null);
@@ -33,14 +34,82 @@ const AgeForm = ({ Error, handleAge }) => {
     }
   }
 
+  const validateDate = () => {
+    const dayInt = parseInt(birthDay);
+    const monthInt = parseInt(birthMonth);
+    const yearInt = parseInt(birthYear);
+
+    if (!birthDay || !birthMonth || !birthYear) {
+      setError("This field is required");
+      Init();
+      return false;
+    }
+
+    const currentDate = new Date();
+    const birthDate = new Date(yearInt, monthInt - 1, dayInt);
+
+    if (birthDate > currentDate) {
+      setError("The date cannot be in the future.");
+      return false;
+    }
+
+    const daysInMonth = new Date(yearInt, monthInt, 0).getDate();
+    if (dayInt < 1 || dayInt > daysInMonth) {
+      setError(
+        `Invalid day. ${monthInt}/${yearInt} only has ${daysInMonth} days.`
+      );
+      return false;
+    }
+
+    if (monthInt < 1 || monthInt > 12) {
+      setError("Invalid month. Month should be between 1 and 12.");
+      return false;
+    }
+
+    if (yearInt > currentDate.getFullYear() || yearInt < 1900) {
+      setError("Please enter a valid year.");
+      return false;
+    }
+
+    setError("");
+    return birthDate;
+  };
+
+  // calculate age
+  const calculateAge = (birthDate) => {
+    const currentDate = new Date();
+    let ageYears = currentDate.getFullYear() - birthDate.getFullYear();
+    let ageMonths = currentDate.getMonth() - birthDate.getMonth();
+    let ageDays = currentDate.getDate() - birthDate.getDate();
+
+    if (ageDays < 0) {
+      ageMonths -= 1;
+      ageDays += new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        0
+      ).getDate();
+    }
+
+    if (ageMonths < 0) {
+      ageYears -= 1;
+      ageMonths += 12;
+    }
+
+    setAge({ years: ageYears, months: ageMonths, days: ageDays });
+  };
+
   // handle form
   function handleSubmit(e) {
     e.preventDefault();
-
     if (!birthDay || !birthMonth || !birthYear) return;
     const newAge = { birthDay, birthMonth, birthYear };
     handleAge(newAge);
     console.log(newAge);
+    const birthDate = validateDate();
+    if (birthDate) {
+      calculateAge(birthDate);
+    }
     setBirthDay("");
     setBirthMonth("");
     setBirthYear("");
@@ -63,6 +132,8 @@ const AgeForm = ({ Error, handleAge }) => {
         Error={Error}
         birthDate={birthDay}
         setBirthDate={setBirthDay}
+        min={1}
+        max={31}
       />
       <AgeInput
         handleFocus={handleFocus}
@@ -76,6 +147,8 @@ const AgeForm = ({ Error, handleAge }) => {
         Error={Error}
         birthDate={birthMonth}
         setBirthDate={setBirthMonth}
+        min={1}
+        max={12}
       />
       <AgeInput
         handleFocus={handleFocus}
@@ -89,7 +162,32 @@ const AgeForm = ({ Error, handleAge }) => {
         Error={Error}
         birthDate={birthYear}
         setBirthDate={setBirthYear}
+        min={1900}
+        max={new Date().getFullYear()}
       />
+      <button type="submit">
+        {" "}
+        <img
+          src="./assets/images/icon-arrow.svg"
+          alt="icon arrow"
+          className=" bg-Purple rounded-full  absolute z-10  xs:h-[2.75rem] xs:w-[2.75rem] xs:p-3 xs:transform xs:translate-x-[-50%]  xs:left-[50%]
+xs:bottom-[8rem]
+
+    hover:bg-Offblack cursor-pointer
+    md:h-[3.75rem] md:w-[3.65rem]
+    md:p-[0.85rem] 
+    md:translate-y-[-42%]
+    md:top-[42%]
+
+
+lg:translate-y-[-36.33%]
+lg:top-[36.33%]
+lg:left-[32rem]
+
+
+    "
+        />
+      </button>
     </form>
   );
 };

@@ -10,6 +10,8 @@ const AgeInput = ({
   setBirthDate,
   handleFocus,
   num,
+  min,
+  max,
 }) => {
   return (
     <div className="input-block">
