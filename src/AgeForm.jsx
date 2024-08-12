@@ -1,6 +1,6 @@
 import AgeInput from "./AgeInput";
 import { useRef, useEffect, useState } from "react";
-const AgeForm = ({ handleAge, setAge }) => {
+const AgeForm = ({ setAge }) => {
   const [birthDay, setBirthDay] = useState("");
   const [birthMonth, setBirthMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");

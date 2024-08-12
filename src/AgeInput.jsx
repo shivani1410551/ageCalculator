@@ -26,6 +26,8 @@ const AgeInput = ({
         placeholder={placeholder}
         className={`${inputClassName}`}
         ref={inputRef}
+        min={min}
+        max={max}
         onClick={() => handleFocus(num)}
         value={birthDate}
         onChange={(e) => setBirthDate(Number(e.target.value))}
