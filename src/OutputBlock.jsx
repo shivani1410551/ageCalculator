@@ -1,9 +1,9 @@
-const OutputBlock = ({ item }) => {
+const OutputBlock = ({ className, text, id }) => {
   return (
-    <div className={`${item.className} md:space-x-2`}>
+    <div className={`${className} md:space-x-2`}>
       <span className="hyphen">--</span>
       <span className="hyphen">--</span>
-      <span className="outputText">{item.text}</span>
+      <span className="outputText">{text}</span>
     </div>
   );
 };

@@ -5,6 +5,7 @@ function validate(birthDay, birthMonth, birthYear) {
     Init();
     return;
   }
+}
   // input validation
   let tempErrors = { birthDay: "", birthMonth: "", birthYear: "" };
   const parsedDay = parseInt(birthDay, 10);
