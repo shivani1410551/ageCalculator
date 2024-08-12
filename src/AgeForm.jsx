@@ -49,7 +49,7 @@ const AgeForm = ({ handleAge, setAge }) => {
     const birthDate = new Date(yearInt, monthInt - 1, dayInt);
 
     if (birthDate > currentDate) {
-      setError("The date cannot be in the future.");
+      setError("Must be a valid date");
       return false;
     }
 
@@ -62,12 +62,12 @@ const AgeForm = ({ handleAge, setAge }) => {
     }
 
     if (monthInt < 1 || monthInt > 12) {
-      setError("Invalid month. Month should be between 1 and 12.");
+      setError("Must be a valid month");
       return false;
     }
 
     if (yearInt > currentDate.getFullYear() || yearInt < 1900) {
-      setError("Please enter a valid year.");
+      setError("Must be in the  past");
       return false;
     }
 
